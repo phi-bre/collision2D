@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public abstract class Shape {
 
     protected float x, y, a;
+    protected Point[] buffer;
+    protected boolean changed;
 
     public abstract Vector[] getVectors();
 
@@ -42,5 +44,26 @@ public abstract class Shape {
 
     public Intersection[] getIntersections(Shape shape) {
         return Shape.getIntersections(this, shape);
+    }
+
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+        this.changed = true;
+    }
+
+    public void setAngle(float a) {
+        this.a = a;
+        this.changed = true;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+        this.changed = true;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+        this.changed = true;
     }
 }
