@@ -1,3 +1,5 @@
+package com.collision;
+
 public class Point {
 
     private float x;

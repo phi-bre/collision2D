@@ -1,3 +1,5 @@
+package com.collision;
+
 public class Circle extends Shape {
 
     private float r;
@@ -8,18 +10,20 @@ public class Circle extends Shape {
         this.r = r;
     }
 
-    @Override
     public void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
+    public Vector[] getVectors() {
+        return new Vector[0];
+    }
+
     public void setX(float x) {
         this.x = x;
     }
 
-    @Override
     public void setY(float y) {
         this.y = y;
     }
@@ -31,4 +35,5 @@ public class Circle extends Shape {
     public void setR(float r) {
         this.r = r;
     }
+
 }
