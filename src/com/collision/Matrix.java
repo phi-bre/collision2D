@@ -16,18 +16,18 @@ public class Matrix {
 
     public static float[][] add(float[][] a, float[][] b) {
 
-        int ar = a.length;      // A - rows
-        int ac = a[0].length;   // A - columns
-        int br = b.length;      // B - rows
-        int bc = b[0].length;   // B - columns
+        int ar = a[0].length;      // A - rows
+        int ac = a.length;   // A - columns
+        int br = b[0].length;      // B - rows
+        int bc = b.length;   // B - columns
 
-        if (ar != br) throw new IllegalArgumentException("Rows of the matrices did not match");
-        else if (ac != bc) throw new IllegalArgumentException("Columns of the matrices did not match");
+        if (ar != br) throw new IllegalArgumentException("Rows of the matrices don't match");
+        else if (ac != bc) throw new IllegalArgumentException("Columns of the matrices don't match");
 
-        float[][] c = new float[ar][ac];
+        float[][] c = new float[ac][ar];
 
-        for (int i = 0; i < ar; i++) {
-            for (int j = 0; j < ac; j++) {
+        for (int i = 0; i < ac; i++) {
+            for (int j = 0; j < ar; j++) {
                 c[i][j] = a[i][j] + b[i][j];
             }
         }

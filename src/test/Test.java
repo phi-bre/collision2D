@@ -32,8 +32,9 @@ public class Test extends Application {
 
         Vector v1 = new Vector(100, 100, 400, 400);
         Vector v2 = new Vector(200, 100, 100, 200);
-        Rectangle r1 = new Rectangle(300, 300, 150, 200, 0);
+        Rectangle r1 = new Rectangle(30, 30, 150, 200, 0);
 
+        /*
         canvas.setOnMouseMoved((event -> {
             r1.setPosition((float) event.getX(), (float) event.getY());
 
@@ -44,6 +45,9 @@ public class Test extends Application {
             Intersection[] intersections = r1.getIntersections(new Polygon(0, 0, 0, v1));
             renderPoints(intersections);
         }));
+        */
+
+        renderPoints(r1.getPoints());
     }
 
     public Intersection[] getIntersections(Shape ... shapes) {

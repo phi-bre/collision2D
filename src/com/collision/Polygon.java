@@ -2,17 +2,36 @@ package com.collision;
 
 public class Polygon extends Shape {
 
-    private Vector[] vectors;
-
-    public Polygon(float x, float y, float a, Vector ... vectors) {
+    public Polygon(float x, float y, float a, Point ... points) {
         this.x = x;
         this.y = y;
         this.a = a;
-        this.vectors = vectors;
+        this.points = points;
+    }
+
+    public Polygon(float x, float y, float a) {
+        this.x = x;
+        this.y = y;
+        this.a = a;
     }
 
     @Override
-    public Vector[] getVectors() {
-        return vectors;
+    public void setPosition(float x, float y) {
+
+    }
+
+    @Override
+    public void setAngle(float a) {
+
+    }
+
+    @Override
+    public void setX(float x) {
+
+    }
+
+    @Override
+    public void setY(float y) {
+
     }
 }
