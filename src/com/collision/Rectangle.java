@@ -33,6 +33,9 @@ public class Rectangle extends Polygon {
         // Translate
 //        rectangle.setPosition(100, 0);
 //        Arrays.asList(rectangle.getPoints()).forEach(System.out::println);
+
+
+        //Matrix m = new Matrix(new Double[][]{{2d, 3d}, {2d, 5.09d}});
     }
 
 }

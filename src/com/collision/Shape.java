@@ -25,7 +25,7 @@ public abstract class Shape {
 //                for (Vector v : s2.getVectors()) {
 //                    Intersection i = Intersection.getIntersection(vector, v);
 //                    if (i != null)
-//                        intersections.add(i);
+//                        intersections.addition(i);
 //                }
 //            }
 //        } else {
@@ -33,7 +33,7 @@ public abstract class Shape {
 //                for (Vector v : s2.getVectors()) {
 //                    Intersection i = Intersection.getIntersection(vector, v);
 //                    if (i != null)
-//                        intersections.add(i);
+//                        intersections.addition(i);
 //                }
 //            }
 //        }

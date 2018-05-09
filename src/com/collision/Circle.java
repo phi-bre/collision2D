@@ -16,6 +16,11 @@ public class Circle extends Shape {
     }
 
     @Override
+    public void setAngle(float a) {
+
+    }
+
+    @Override
     public Vector[] getVectors() {
         return new Vector[0];
     }
