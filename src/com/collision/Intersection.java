@@ -3,25 +3,26 @@ package com.collision;
 public class Intersection extends Point {
 
     private float t;
+    private Segment s1, s2;
 
     public Intersection(float x, float y, float t) {
         super(x, y);
         this.t = t;
     }
 
-    public static Intersection getIntersection(Vector v1, Vector v2) {
+    public static Intersection getIntersection(Segment s1, Segment s2) {
 
-        //Vector 1
-        float v1px = v1.getA().getX();
-        float v1py = v1.getA().getY();
-        float v1dx = v1.getB().getX() - v1.getA().getX();
-        float v1dy = v1.getB().getY() - v1.getA().getY();
+        //Segment 1
+        float v1px = s1.getA().getX();
+        float v1py = s1.getA().getY();
+        float v1dx = s1.getB().getX() - s1.getA().getX();
+        float v1dy = s1.getB().getY() - s1.getA().getY();
 
-        //Vector 2
-        float v2px = v2.getA().getX();
-        float v2py = v2.getA().getY();
-        float v2dx = v2.getB().getX() - v2.getA().getX();
-        float v2dy = v2.getB().getY() - v2.getA().getY();
+        //Segment 2
+        float v2px = s2.getA().getX();
+        float v2py = s2.getA().getY();
+        float v2dx = s2.getB().getX() - s2.getA().getX();
+        float v2dy = s2.getB().getY() - s2.getA().getY();
 
         //If Parallel
         float v1mag = (float) Math.sqrt(v1dx * v1dx + v1dy * v1dy);
@@ -38,14 +39,12 @@ public class Intersection extends Point {
         if (t1 < 0) return null;
         if (t2 < 0 || t2 > 1) return null;
 
-        return new Intersection(v1px + v1dx * t1, v1py + v1dy * t1, t1);
-    }
+        float x = v1px + v1dx * t1;
+        float y = v1py + v1dy * t1;
 
-    public static void main(String[] args) {
-        Vector v1 = new Vector(-10, 0, 10, 0);
-        Vector v2 = new Vector(0, 10, 4, -9);
-
-        Intersection i = Intersection.getIntersection(v1, v2);
-        System.out.println(i.t);
+        Intersection intersection = new Intersection(x, y, t1);
+        intersection.s1 = s1;
+        intersection.s2 = s2;
+        return intersection;
     }
 }

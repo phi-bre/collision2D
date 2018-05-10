@@ -1,60 +1,33 @@
 package com.collision;
 
-import java.util.ArrayList;
-
 public abstract class Shape {
 
     protected float x, y, a;
-    protected Point[] points;
-    protected Vector[] vectors;
 
-    public Vector[] getVectors() {
-        return vectors;
+    protected abstract void update();
+    public abstract Intersection[] getIntersections(Shape shape);
+    public abstract void translate(float x, float y);
+    public abstract void rotate(float a);
+
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+        this.update();
     }
 
-    public Point[] getPoints() {
-        return points;
+    public void setAngle(float a) {
+        this.a = a;
+        this.update();
     }
 
-    public static Intersection[] getIntersections(Shape s1, Shape s2) {
-        ArrayList<Intersection> intersections = new ArrayList<>();
-//        if (s1 instanceof Circle) {
-//            if (s2 instanceof Circle) {
-//
-//            } else {
-//                for (Vector v : s2.getVectors()) {
-//                    Intersection i = Intersection.getIntersection(vector, v);
-//                    if (i != null)
-//                        intersections.addition(i);
-//                }
-//            }
-//        } else {
-//            for (Vector vector : s1.getVectors()) {
-//                for (Vector v : s2.getVectors()) {
-//                    Intersection i = Intersection.getIntersection(vector, v);
-//                    if (i != null)
-//                        intersections.addition(i);
-//                }
-//            }
-//        }
-        for (Vector vector : s1.getVectors()) {
-            for (Vector v : s2.getVectors()) {
-                Intersection i = Intersection.getIntersection(vector, v);
-                if (i != null)
-                    intersections.add(i);
-            }
-        }
-
-        return intersections.toArray(new Intersection[0]);
+    public void setX(float x) {
+        this.x = x;
+        this.update();
     }
 
-    public Intersection[] getIntersections(Shape shape) {
-        return Shape.getIntersections(this, shape);
+    public void setY(float y) {
+        this.y = y;
+        this.update();
     }
-
-    public abstract void setPosition(float x, float y);
-    public abstract void setAngle(float a);
-    public abstract void setX(float x);
-    public abstract void setY(float y);
 
 }

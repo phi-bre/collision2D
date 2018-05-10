@@ -4,41 +4,37 @@ public class Circle extends Shape {
 
     private float r;
 
-    public Circle(float x, float y, float r) {
+    public Circle(float x, float y, float radius) {
         this.x = x;
         this.y = y;
-        this.r = r;
+        this.r = radius;
     }
 
-    public void setPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public void setAngle(float a) {
-
-    }
-
-    @Override
-    public Vector[] getVectors() {
-        return new Vector[0];
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getR() {
+    public float getRadius() {
         return r;
     }
 
-    public void setR(float r) {
+    public void setRadius(float r) {
         this.r = r;
     }
 
+    @Override
+    public void update() {
+        // nothing
+    }
+
+    @Override
+    public Intersection[] getIntersections(Shape shape) {
+        return null;
+    }
+
+    @Override
+    public void translate(float x, float y) {
+        this.setPosition(this.x + x, this.y + y);
+    }
+
+    @Override
+    public void rotate(float a) {
+        // nothing
+    }
 }

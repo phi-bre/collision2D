@@ -2,8 +2,8 @@ package com.collision;
 
 public class Point {
 
-    private float x;
-    private float y;
+    protected float x;
+    protected float y;
 
     public Point(float x, float y) {
         this.x = x;
@@ -25,4 +25,10 @@ public class Point {
     public void setY(float y) {
         this.y = y;
     }
+
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
 }

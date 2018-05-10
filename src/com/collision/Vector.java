@@ -1,33 +1,23 @@
 package com.collision;
 
-public class Vector {
+public class Vector extends Point {
 
-    private Point a;
-    private Point b;
-
-    public Vector(Point a, Point b) {
-        this.a = a;
-        this.b = b;
+    public Vector(float x, float y) {
+        super(x, y);
     }
 
-    public Vector(float ax, float ay, float bx, float by) {
-        this.a = new Point(ax, ay);
-        this.b = new Point(bx, by);
+    public float[] getVector() {
+        return new float[]{x, y};
     }
 
-    public Point getA() {
-        return a;
+    public void rotate(float a) {
+        x = (float) (x * Math.cos(a) + (-Math.sin(a) * y));
+        y = (float) (x * Math.sin(a) + (Math.cos(a) * y));
     }
 
-    public void setA(Point a) {
-        this.a = a;
+    public void translate(float x, float y) {
+        this.x += x;
+        this.y += y;
     }
 
-    public Point getB() {
-        return b;
-    }
-
-    public void setB(Point b) {
-        this.b = b;
-    }
 }

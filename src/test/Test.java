@@ -30,24 +30,31 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        Vector v1 = new Vector(100, 100, 400, 400);
-        Vector v2 = new Vector(200, 100, 100, 200);
-        Rectangle r1 = new Rectangle(30, 30, 150, 200, 0);
+        ArrayList<Shape> shapes = new ArrayList<>();
+        Rectangle r1 = new Rectangle(120, 130, 0, 100, 70);
+        Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
+        Rectangle r3 = new Rectangle(90, 200, 0, 150, 120);
+        shapes.add(r1);
+        shapes.add(r2);
+        shapes.add(r3);
 
-        /*
         canvas.setOnMouseMoved((event -> {
             r1.setPosition((float) event.getX(), (float) event.getY());
 
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-            renderVectors(v1, v2);
-            renderRectangles(r1);
+            ArrayList<Intersection> intersections = new ArrayList<>();
 
-            Intersection[] intersections = r1.getIntersections(new Polygon(0, 0, 0, v1));
-            renderPoints(intersections);
+            for (Shape shape : shapes) {
+                for (Shape s : shapes) {
+                    if (shape != s) {
+                        intersections.addAll(Arrays.asList(shape.getIntersections(s)));
+                    }
+                }
+            }
+
+            renderRectangles(r1, r2, r3);
+            renderPoints(intersections.toArray(new Intersection[0]));
         }));
-        */
-
-        renderPoints(r1.getPoints());
     }
 
     public Intersection[] getIntersections(Shape ... shapes) {
@@ -66,27 +73,29 @@ public class Test extends Application {
 
     public void renderRectangles(Rectangle ... rectangles) {
         for (Rectangle rectangle : rectangles) {
-            renderVectors(rectangle.getVectors());
+            renderSegments(rectangle.getSegments());
         }
     }
 
-    public void renderVectors(Vector ... vectors) {
-        for (Vector vector : vectors) {
+    public void renderSegments(Segment ... segments) {
+        for (Segment segment : segments) {
             gc.setStroke(Color.BLACK);
             gc.strokeLine(
-                    vector.getA().getX(),
-                    vector.getA().getY(),
-                    vector.getB().getX(),
-                    vector.getB().getY()
+                    segment.getA().getX(),
+                    segment.getA().getY(),
+                    segment.getB().getX(),
+                    segment.getB().getY()
             );
         }
     }
 
     public void renderPoints(Point ... points) {
         for (Point point : points) {
-            float size = 5;
-            gc.setFill(Color.RED);
-            gc.fillOval(point.getX() - size / 2, point.getY() - size / 2, size, size);
+            //if (point != null) {
+                float size = 5;
+                gc.setFill(Color.RED);
+                gc.fillOval(point.getX() - size / 2, point.getY() - size / 2, size, size);
+            //}
         }
     }
 
