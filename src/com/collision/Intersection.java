@@ -47,4 +47,38 @@ public class Intersection extends Point {
         intersection.s2 = s2;
         return intersection;
     }
+
+//    public static Intersection getIntersection(Segment s1, Segment s2) {
+//
+//        Vector p = new Vector(s1.getA());
+//        Vector s = Vector.subtract(new Vector(s1.getB()), p);
+//        Vector q = new Vector(s2.getA());
+//        Vector r = Vector.subtract(new Vector(s2.getB()), q);
+//
+//        float uN = Vector.cross(Vector.subtract(q, p), r);
+//        float dE = Vector.cross(r, s);
+//
+//        if (uN == 0 && dE == 0) {
+//            // Collinear
+//
+//        }
+//
+//        if (dE == 0) {
+//            return null;
+//        }
+//
+////        float t = Vector.dot(Vector.subtract(q, p), s) / (Vector.dot(r, s));
+////        float u = Vector.dot(Vector.subtract(q, p), r) / Vector.dot(r, s);
+//
+//        float u = uN / dE;
+//        float t = Vector.cross(Vector.subtract(q, p), s);
+//
+//        float x = p.getX() + s.getX() * t;
+//        float y = p.getY() + s.getY() * t;
+//
+//        Intersection intersection = new Intersection(x, y, t);
+//        intersection.s1 = s1;
+//        intersection.s2 = s2;
+//        return intersection;
+//    }
 }
