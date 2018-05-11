@@ -31,7 +31,7 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test2();
+        test1();
     }
 
     public void test1() {
@@ -64,7 +64,7 @@ public class Test extends Application {
 
     public void test2() {
         Segment s1 = new Segment(100, 100, 200, 200);
-        Segment s2 = new Segment(100, 200, 200, 100);
+        Segment s2 = new Segment(300, 230, 100, 200);
 
         Intersection intersection = Intersection.getIntersection(s1, s2);
 
