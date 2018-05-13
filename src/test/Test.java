@@ -1,6 +1,11 @@
 package test;
 
 import com.collision.*;
+import com.collision.line.Line;
+import com.collision.line.Ray;
+import com.collision.line.Segment;
+import com.collision.shape.Rectangle;
+import com.collision.shape.Shape;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Test extends Application {
 
@@ -34,14 +40,56 @@ public class Test extends Application {
         test1();
     }
 
+    private void test3() {
+        ArrayList<Line> lines = new ArrayList<>();
+//        Rectangle r1 = new Rectangle(120, 130, 0, 100, 70);
+//        Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
+//        Rectangle r3 = new Rectangle(90, 200, 0, 150, 120);
+        Ray ray = new Ray(200, 200, 0, 0);
+//        lines.addAll(Arrays.asList(r1.getSegments()));
+//        lines.addAll(Arrays.asList(r2.getSegments()));
+//        lines.addAll(Arrays.asList(r3.getSegments()));
+        Random random = new Random();
+        for (int i = 0; i < 1; i++) {
+            Segment segment = new Segment(random.nextInt(512), random.nextInt(512), random.nextInt(512), random.nextInt(512));
+            lines.add(segment);
+        }
+        lines.add(ray);
+
+        canvas.setOnMouseMoved((event -> {
+            ray.getB().setPosition((float) event.getX(), (float) event.getY());
+
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            ArrayList<Intersection> intersections = new ArrayList<>();
+
+            for (Line line : lines) {
+                for (Line l : lines) {
+                    Intersection intersection = Intersection.getIntersection(l, line);
+                    if (intersection != null) intersections.add(intersection);
+                }
+            }
+
+            //renderRectangles(r1, r2, r3);
+            for (Line line : lines) {
+                if (line instanceof Segment) {
+                    renderSegments((Segment) line);
+                }
+            }
+            renderPoints(intersections.toArray(new Intersection[0]));
+        }));
+    }
+
     public void test1() {
         ArrayList<Shape> shapes = new ArrayList<>();
         Rectangle r1 = new Rectangle(120, 130, 0, 100, 70);
         Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
+        Rectangle r4 = new Rectangle(70, 150, 0, 50, 100);
         Rectangle r3 = new Rectangle(90, 200, 0, 150, 120);
         shapes.add(r1);
         shapes.add(r2);
         shapes.add(r3);
+        shapes.add(r4);
+        r2.rotate(33);
 
         canvas.setOnMouseMoved((event -> {
             r1.setPosition((float) event.getX(), (float) event.getY());
@@ -57,7 +105,7 @@ public class Test extends Application {
                 }
             }
 
-            renderRectangles(r1, r2, r3);
+            renderRectangles(r1, r2, r3, r4);
             renderPoints(intersections.toArray(new Intersection[0]));
         }));
     }

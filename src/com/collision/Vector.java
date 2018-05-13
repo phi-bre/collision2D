@@ -39,8 +39,11 @@ public class Vector extends Point {
     }
 
     public void rotate(float a) {
-        x = (float) (x * Math.cos(a) + (-Math.sin(a) * y));
-        y = (float) (x * Math.sin(a) + (Math.cos(a) * y));
+        float theta = (float) Math.toRadians(a);
+        float x = (float) (this.x * Math.cos(theta) - (Math.sin(theta) * this.y));
+        float y = (float) (this.x * Math.sin(theta) + (Math.cos(theta) * this.y));
+        this.x = x;
+        this.y = y;
     }
 
     public void translate(float x, float y) {

@@ -1,4 +1,6 @@
-package com.collision;
+package com.collision.shape;
+
+import com.collision.Vector;
 
 public class Rectangle extends Polygon {
 

@@ -1,17 +1,20 @@
-package com.collision;
+package com.collision.line;
 
-public class Segment {
+import com.collision.Point;
 
-    private Point a, b;
+public class Line {
 
-    public Segment(Point a, Point b) {
-        this.a = a;
-        this.b = b;
-    }
+    protected Point a, b;
 
-    public Segment(float ax, float ay, float bx, float by) {
+    public Line(float ax, float ay, float bx, float by) {
         this.a = new Point(ax, ay);
         this.b = new Point(bx, by);
+    }
+
+
+    public Line(Point a, Point b) {
+        this.a = a;
+        this.b = b;
     }
 
     public Point getA() {

@@ -1,4 +1,9 @@
-package com.collision;
+package com.collision.shape;
+
+import com.collision.Intersection;
+import com.collision.Point;
+import com.collision.Vector;
+import com.collision.line.Segment;
 
 import java.util.ArrayList;
 

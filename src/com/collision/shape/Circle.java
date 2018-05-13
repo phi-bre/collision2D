@@ -1,4 +1,6 @@
-package com.collision;
+package com.collision.shape;
+
+import com.collision.Intersection;
 
 public class Circle extends Shape {
 
