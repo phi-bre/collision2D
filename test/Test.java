@@ -1,5 +1,3 @@
-package test;
-
 import com.collision.*;
 import com.collision.line.Line;
 import com.collision.line.Ray;
