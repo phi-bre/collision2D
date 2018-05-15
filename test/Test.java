@@ -35,7 +35,18 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test1();
+        test4();
+    }
+
+    private void test4() {
+        Segment segment = new Segment(200, 10, 200, 200);
+        Segment ray = new Segment(30, 30, 35, 35);
+
+        Intersection intersection = Intersection.getIntersection(segment, ray);
+
+
+        renderSegments(segment, ray);
+        renderPoints(intersection);
     }
 
     private void test3() {
@@ -48,7 +59,7 @@ public class Test extends Application {
 //        lines.addAll(Arrays.asList(r2.getSegments()));
 //        lines.addAll(Arrays.asList(r3.getSegments()));
         Random random = new Random();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 100; i++) {
             Segment segment = new Segment(random.nextInt(512), random.nextInt(512), random.nextInt(512), random.nextInt(512));
             lines.add(segment);
         }

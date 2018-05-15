@@ -26,10 +26,6 @@ public class Vector extends Point {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
-    public static Vector multiply(Vector vector, float number) {
-        return new Vector()
-    }
-
 //    public static float length(Vector v1, Vector v2) {
 //        return (float) Math.sqrt(dot(v1, v1) + dot(v2, v2));
 //    }

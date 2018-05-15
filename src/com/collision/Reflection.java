@@ -1,16 +1,44 @@
 package com.collision;
 
+import com.collision.line.Line;
+
 public class Reflection {
 
-    public static Reflection getReflection(Intersection intersection) {
-        float dox = intersection.getX() - intersection.getL1().getA().getX();
-        float doy = intersection.getY() - intersection.getL1().getA().getY();
-        Vector d = new Vector(dox, doy);
-        float nox = intersection.getX() - intersection.getL2().getB().getX();
-        float noy = intersection.getY() - intersection.getL2().getB().getY();
-        Vector n = new Vector(nox, noy);
-        n = Vector.normalize(n);
+    private Vector vector;
 
-        Vector r = Vector.subtract(d, (Vector.));
+    public Reflection(float x, float y) {
+        vector = new Vector(x, y);
+    }
+
+    public Reflection(Vector vector) {
+        this.vector = vector;
+    }
+
+    public static Reflection getReflection(Vector v1, Vector v2) {
+
+        float nx = -v1.y;
+        float ny = v1.x;
+        float dx = v2.x;
+        float dy = v2.y;
+
+        float l = (float) Math.sqrt(nx * nx + ny * ny);
+        float nxn = nx / l;
+        float nyn = ny / l;
+
+        float d = dx * nxn + dy * nyn;
+        float rx = dx - 2 * d * nxn;
+        float ry = dy - 2 * d * nyn;
+
+        return new Reflection(rx, ry);
+    }
+
+    public static Reflection getReflection(Intersection intersection) {
+        Line l1 = intersection.getL1();
+        Line l2 = intersection.getL2();
+
+        Vector v1 = new Vector(intersection.x - l2.getB().x, intersection.y - l2.getB().y);
+        Vector v2 = new Vector(intersection.x - l1.getA().x, intersection.y - l1.getA().y);
+
+        return getReflection(v1, v2);
     }
 }
