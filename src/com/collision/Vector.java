@@ -26,6 +26,10 @@ public class Vector extends Point {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
+    public static Vector multiplication(double scalar, Vector vector) {
+        return new Vector(vector.x * scalar, vector.y * scalar);
+    }
+
 //    public static double length(Vector v1, Vector v2) {
 //        return (double) Math.sqrt(dot(v1, v1) + dot(v2, v2));
 //    }
@@ -56,12 +60,16 @@ public class Vector extends Point {
             y = vector.x;
         } else {
             // For any other angle
-            double theta = (double) Math.toRadians(a);
-            x = (double) (vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y));
-            y = (double) (vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y));
+            double theta = Math.toRadians(a);
+            x = vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y);
+            y = vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y);
         }
 
         return new Vector(x, y);
+    }
+
+    public double getRotation() {
+        return Math.acos(x / Math.sqrt(x*x + y*y));
     }
 
     public double[] toArray() {
@@ -74,7 +82,7 @@ public class Vector extends Point {
     }
 
     public double length() {
-        return (double) Math.sqrt(x * x + y * y);
+        return Math.sqrt(x * x + y * y);
     }
 
     public void rotate(double a) {
@@ -92,9 +100,9 @@ public class Vector extends Point {
             y = this.x;
         } else {
             // For any other angle
-            double theta = (double) Math.toRadians(a);
-            x = (double) (this.x * Math.cos(theta) - (Math.sin(theta) * this.y));
-            y = (double) (this.x * Math.sin(theta) + (Math.cos(theta) * this.y));
+            double theta = Math.toRadians(a);
+            x = this.x * Math.cos(theta) - (Math.sin(theta) * this.y);
+            y = this.x * Math.sin(theta) + (Math.cos(theta) * this.y);
         }
 
         this.x = x;

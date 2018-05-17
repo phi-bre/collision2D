@@ -3,7 +3,7 @@ package com.collision;
 public abstract class Matrix {
 
     public static double[][] inverse(double[][] a) {
-        
+
         int ar = a[0].length;
         int ac = a.length;
 
@@ -80,6 +80,17 @@ public abstract class Matrix {
         }
 
         return c;
+    }
+
+    public static double[][] translation(double x, double y, double[][] m) {
+        double[][] t = new double[][]{{1, 0, 0}, {0, 1, 0}, {x, y, 1}};
+        double[][] mt = new double[m.length][3];
+        for (int i = 0; i < m.length; i++) {
+            mt[i][0] = m[i][0];
+            mt[i][1] = m[i][1];
+            mt[i][2] = 1;
+        }
+        return multiplication(t, mt);
     }
 
     public static double[][] rotation(double angle, double[][] m) {

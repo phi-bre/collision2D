@@ -32,6 +32,7 @@ public class Intersection extends Point {
 
     public static Intersection getIntersection(Line l1, Line l2) {
 
+        long past = System.currentTimeMillis();
         // Line 1
         double v1px = l1.getA().getX();
         double v1py = l1.getA().getY();
@@ -45,8 +46,8 @@ public class Intersection extends Point {
         double v2dy = l2.getB().getY() - l2.getA().getY();
 
         // If Parallel
-        double v1mag = (double) Math.sqrt(v1dx * v1dx + v1dy * v1dy);
-        double v2mag = (double) Math.sqrt(v2dx * v2dx + v2dy * v2dy);
+        double v1mag = Math.sqrt(v1dx * v1dx + v1dy * v1dy);
+        double v2mag = Math.sqrt(v2dx * v2dx + v2dy * v2dy);
         if (v1dx / v1mag == v2dx / v2mag && v1dy / v1mag == v2dy / v2mag) { // Directions are the same.
             return null;
         }
@@ -62,6 +63,8 @@ public class Intersection extends Point {
 
         double x = v1px + v1dx * t1;
         double y = v1py + v1dy * t1;
+
+        System.out.println(System.currentTimeMillis() - past);
 
         Intersection intersection = new Intersection(x, y, t1, t2);
         intersection.l1 = l1;

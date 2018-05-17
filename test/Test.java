@@ -19,36 +19,47 @@ import java.util.Random;
 
 public class Test extends Application {
 
+    private int WIDTH, HEIGHT;
+
     private GraphicsContext gc;
     private Canvas canvas;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        WIDTH = 512;
+        HEIGHT = 512;
         // Initialization
         Pane root = new Pane();
-        Scene scene = new Scene(root, 512, 512);
+        Scene scene = new Scene(root, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
-        canvas = new Canvas(512, 512);
+        canvas = new Canvas(WIDTH, HEIGHT);
         canvas.setFocusTraversable(true);
         canvas.addEventFilter(MouseEvent.ANY, (event) -> canvas.requestFocus());
         root.getChildren().add(canvas);
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test1();
+        test4();
     }
 
     private void test4() {
-        Segment segment = new Segment(200, 10, 200, 200);
-        Segment ray = new Segment(30, 30, 235, 80);
+        Segment segment = new Segment(400, 10, 200, 200);
+        Ray ray = new Ray(30, 30, 235, 80);
 
-        Intersection intersection = Intersection.getIntersection(segment, ray);
-        Reflection reflection = Reflection.getReflection(intersection); // May throw NullpointerE.
+        canvas.setOnMouseMoved((event -> {
+            ray.getB().setPosition(event.getX(), event.getY());
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        //Segment s = new Segment(reflection.getVector(), reflection.getOrigin());
-
-        //renderSegments(segment, ray, s);
-        renderPoints(intersection);
+            Intersection intersection = Intersection.getIntersection(ray, segment);
+            if (intersection != null) {
+                Reflection reflection = Reflection.getReflection(ray, segment);
+                Segment s = new Segment(reflection.getVector(), reflection.getOrigin());
+                renderSegments(s);
+                renderPoints(intersection);
+            }
+            renderRay(ray);
+            renderSegments(segment);
+        }));
     }
 
     private void test3() {
@@ -170,6 +181,17 @@ public class Test extends Application {
                 gc.setFill(Color.RED);
                 gc.fillOval(point.getX() - size / 2, point.getY() - size / 2, size, size);
             //}
+        }
+    }
+
+    public void renderRay(Ray ray) {
+        Rectangle rectangle = new Rectangle(WIDTH/2, HEIGHT/2, 0, WIDTH, HEIGHT);
+        Intersection intersection;
+        for (Segment segment : rectangle.getSegments()) {
+            if ((intersection = Intersection.getIntersection(ray, segment)) != null) {
+                gc.setFill(Color.LIGHTGRAY);
+                gc.strokeLine(ray.getA().getX(), ray.getA().getY(), intersection.getX(), intersection.getY());
+            }
         }
     }
 
