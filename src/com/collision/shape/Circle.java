@@ -4,19 +4,19 @@ import com.collision.Intersection;
 
 public class Circle extends Shape {
 
-    private float r;
+    private double r;
 
-    public Circle(float x, float y, float radius) {
+    public Circle(double x, double y, double radius) {
         this.x = x;
         this.y = y;
         this.r = radius;
     }
 
-    public float getRadius() {
+    public double getRadius() {
         return r;
     }
 
-    public void setRadius(float r) {
+    public void setRadius(double r) {
         this.r = r;
     }
 
@@ -31,12 +31,12 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void translate(float x, float y) {
+    public void translate(double x, double y) {
         this.setPosition(this.x + x, this.y + y);
     }
 
     @Override
-    public void rotate(float a) {
+    public void rotate(double a) {
         // nothing
     }
 }

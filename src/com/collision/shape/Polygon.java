@@ -1,6 +1,7 @@
 package com.collision.shape;
 
 import com.collision.Intersection;
+import com.collision.Matrix;
 import com.collision.Point;
 import com.collision.Vector;
 import com.collision.line.Segment;
@@ -13,7 +14,7 @@ public class Polygon extends Shape {
     protected Point[] points;
     protected Segment[] segments;
 
-    public Polygon(float x, float y, float a, Vector ... vectors) {
+    public Polygon(double x, double y, double a, Vector ... vectors) {
         this.x = x;
         this.y = y;
         this.a = a;
@@ -38,8 +39,8 @@ public class Polygon extends Shape {
         // Calculate Points
         for (int i = 0; i < vectors.length; i++) {
             Vector vector = vectors[i];
-            float x = vector.getX() + this.x;
-            float y = vector.getY() + this.y;
+            double x = vector.getX() + this.x;
+            double y = vector.getY() + this.y;
 
             if (initialize) {
                 points[i] = new Point(x, y);
@@ -66,7 +67,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public void translate(float x, float y) {
+    public void translate(double x, double y) {
         for (Vector vector : vectors) {
             vector.translate(x, y);
         }
@@ -74,9 +75,14 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public void rotate(float a) {
-        for (Vector vector : vectors) {
-            vector.rotate(a);
+    public void rotate(double a) {
+        double[][] m = new double[points.length][2];
+        for (int i = 0; i < vectors.length; i++) {
+            m[i] = vectors[i].toArray();
+        }
+        double[][] rm = Matrix.rotation(a, m);
+        for (int i = 0; i < vectors.length; i++) {
+            vectors[i].fromArray(rm[i]);
         }
         update();
     }

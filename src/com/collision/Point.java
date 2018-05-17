@@ -2,31 +2,31 @@ package com.collision;
 
 public class Point {
 
-    protected float x;
-    protected float y;
+    protected double x;
+    protected double y;
 
-    public Point(float x, float y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public void setPosition(float x, float y) {
+    public void setPosition(double x, double y) {
         this.x = x;
         this.y = y;
     }

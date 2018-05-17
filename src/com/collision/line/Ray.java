@@ -8,7 +8,7 @@ public class Ray extends Line {
         super(a, b);
     }
 
-    public Ray(float ax, float ay, float bx, float by) {
+    public Ray(double ax, double ay, double bx, double by) {
         super(ax, ay, bx, by);
     }
 }

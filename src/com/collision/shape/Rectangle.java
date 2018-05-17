@@ -4,9 +4,9 @@ import com.collision.Vector;
 
 public class Rectangle extends Polygon {
 
-    private float w, h;
+    private double w, h;
 
-    public Rectangle(float x, float y, float a, float w, float h) {
+    public Rectangle(double x, double y, double a, double w, double h) {
         super(
             x, y, a,
             new Vector(-w / 2, h / 2),

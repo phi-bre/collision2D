@@ -8,13 +8,13 @@ public class Segment extends Line {
         super(a, b);
     }
 
-    public Segment(float ax, float ay, float bx, float by) {
+    public Segment(double ax, double ay, double bx, double by) {
         super(ax, ay, bx, by);
     }
 
-    public float length() {
-        float x = b.getX() - a.getX();
-        float y = b.getY() - a.getX();
-        return (float) Math.sqrt(x * x + y * y);
+    public double length() {
+        double x = b.getX() - a.getX();
+        double y = b.getY() - a.getX();
+        return Math.sqrt(x * x + y * y);
     }
 }

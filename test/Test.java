@@ -35,17 +35,19 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test4();
+        test1();
     }
 
     private void test4() {
         Segment segment = new Segment(200, 10, 200, 200);
-        Segment ray = new Segment(30, 30, 35, 35);
+        Segment ray = new Segment(30, 30, 235, 80);
 
         Intersection intersection = Intersection.getIntersection(segment, ray);
+        Reflection reflection = Reflection.getReflection(intersection); // May throw NullpointerE.
 
+        //Segment s = new Segment(reflection.getVector(), reflection.getOrigin());
 
-        renderSegments(segment, ray);
+        //renderSegments(segment, ray, s);
         renderPoints(intersection);
     }
 
@@ -98,7 +100,7 @@ public class Test extends Application {
         shapes.add(r2);
         shapes.add(r3);
         shapes.add(r4);
-        r2.rotate(33);
+        r2.rotate(15);
 
         canvas.setOnMouseMoved((event -> {
             r1.setPosition((float) event.getX(), (float) event.getY());

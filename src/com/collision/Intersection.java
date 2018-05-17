@@ -5,20 +5,20 @@ import com.collision.line.Ray;
 
 public class Intersection extends Point {
 
-    private float t1, t2;
+    private double t1, t2;
     private Line l1, l2;
 
-    public Intersection(float x, float y, float t1, float t2) {
+    public Intersection(double x, double y, double t1, double t2) {
         super(x, y);
         this.t1 = t1;
         this.t2 = t2;
     }
 
-    public float getT1() {
+    public double getT1() {
         return t1;
     }
 
-    public float getT2() {
+    public double getT2() {
         return t2;
     }
 
@@ -33,35 +33,35 @@ public class Intersection extends Point {
     public static Intersection getIntersection(Line l1, Line l2) {
 
         // Line 1
-        float v1px = l1.getA().getX();
-        float v1py = l1.getA().getY();
-        float v1dx = l1.getB().getX() - l1.getA().getX();
-        float v1dy = l1.getB().getY() - l1.getA().getY();
+        double v1px = l1.getA().getX();
+        double v1py = l1.getA().getY();
+        double v1dx = l1.getB().getX() - l1.getA().getX();
+        double v1dy = l1.getB().getY() - l1.getA().getY();
 
         // Line 2
-        float v2px = l2.getA().getX();
-        float v2py = l2.getA().getY();
-        float v2dx = l2.getB().getX() - l2.getA().getX();
-        float v2dy = l2.getB().getY() - l2.getA().getY();
+        double v2px = l2.getA().getX();
+        double v2py = l2.getA().getY();
+        double v2dx = l2.getB().getX() - l2.getA().getX();
+        double v2dy = l2.getB().getY() - l2.getA().getY();
 
         // If Parallel
-        float v1mag = (float) Math.sqrt(v1dx * v1dx + v1dy * v1dy);
-        float v2mag = (float) Math.sqrt(v2dx * v2dx + v2dy * v2dy);
+        double v1mag = (double) Math.sqrt(v1dx * v1dx + v1dy * v1dy);
+        double v2mag = (double) Math.sqrt(v2dx * v2dx + v2dy * v2dy);
         if (v1dx / v1mag == v2dx / v2mag && v1dy / v1mag == v2dy / v2mag) { // Directions are the same.
             return null;
         }
 
         // Solve for T1 & T2
-        float t2 = (v1dx * (v2py - v1py) + v1dy * (v1px - v2px)) / (v2dx * v1dy - v2dy * v1dx);
-        float t1 = (v2px + v2dx * t2 - v1px) / v1dx;
+        double t2 = (v1dx * (v2py - v1py) + v1dy * (v1px - v2px)) / (v2dx * v1dy - v2dy * v1dx);
+        double t1 = (v2px + v2dx * t2 - v1px) / v1dx;
 
         // Some magic
         if (t1 < 0) return null;
         if (!(l1 instanceof Ray) && t1 > 1) return null;
         if (t2 < 0 || t2 > 1) return null;
 
-        float x = v1px + v1dx * t1;
-        float y = v1py + v1dy * t1;
+        double x = v1px + v1dx * t1;
+        double y = v1py + v1dy * t1;
 
         Intersection intersection = new Intersection(x, y, t1, t2);
         intersection.l1 = l1;

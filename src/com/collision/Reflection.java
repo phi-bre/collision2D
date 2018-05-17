@@ -6,7 +6,7 @@ public class Reflection {
 
     private Vector vector;
 
-    public Reflection(float x, float y) {
+    public Reflection(double x, double y) {
         vector = new Vector(x, y);
     }
 
@@ -16,18 +16,18 @@ public class Reflection {
 
     public static Reflection getReflection(Vector v1, Vector v2) {
 
-        float nx = -v1.y;
-        float ny = v1.x;
-        float dx = v2.x;
-        float dy = v2.y;
+        double nx = -v1.y;
+        double ny = v1.x;
+        double dx = v2.x;
+        double dy = v2.y;
 
-        float l = (float) Math.sqrt(nx * nx + ny * ny);
-        float nxn = nx / l;
-        float nyn = ny / l;
+        double l = (double) Math.sqrt(nx * nx + ny * ny);
+        double nxn = nx / l;
+        double nyn = ny / l;
 
-        float d = dx * nxn + dy * nyn;
-        float rx = dx - 2 * d * nxn;
-        float ry = dy - 2 * d * nyn;
+        double d = dx * nxn + dy * nyn;
+        double rx = dx - 2 * d * nxn;
+        double ry = dy - 2 * d * nyn;
 
         return new Reflection(rx, ry);
     }
@@ -40,5 +40,13 @@ public class Reflection {
         Vector v2 = new Vector(intersection.x - l1.getA().x, intersection.y - l1.getA().y);
 
         return getReflection(v1, v2);
+    }
+
+    public static void main(String[] args) {
+        Vector v1 = new Vector(0, 3);
+        Vector v2 = new Vector(-3, 3);
+        Reflection r = getReflection(v2, v1);
+
+        System.out.println(r.vector.getX() + ", " + r.vector.getY());
     }
 }

@@ -2,12 +2,12 @@ package com.collision;
 
 public abstract class Matrix {
 
-    public static float[][] inverse(float[][] a) {
-
+    public static double[][] inverse(double[][] a) {
+        
         int ar = a[0].length;
         int ac = a.length;
 
-        float[][] c = new float[ar][ac];
+        double[][] c = new double[ar][ac];
 
         for (int i = 0; i < ac; i++) {
             for (int j = 0; j < ar; j++) {
@@ -18,7 +18,7 @@ public abstract class Matrix {
         return c;
     }
 
-    public static float[][] addition(float[][] a, float[][] b) {
+    public static double[][] addition(double[][] a, double[][] b) {
 
         int ar = a[0].length; // A - rows
         int ac = a.length;    // A - columns
@@ -28,7 +28,7 @@ public abstract class Matrix {
         if (ar != br) throw new IllegalArgumentException("Rows of the matrices don't match");
         else if (ac != bc) throw new IllegalArgumentException("Columns of the matrices don't match");
 
-        float[][] c = new float[ac][ar];
+        double[][] c = new double[ac][ar];
 
         for (int i = 0; i < ac; i++) {
             for (int j = 0; j < ar; j++) {
@@ -39,7 +39,7 @@ public abstract class Matrix {
         return c;
     }
 
-    public static float[][] subtraction(float[][] a, float[][] b) {
+    public static double[][] subtraction(double[][] a, double[][] b) {
 
         int ar = a[0].length; // A - rows
         int ac = a.length;    // A - columns
@@ -49,7 +49,7 @@ public abstract class Matrix {
         if (ar != br) throw new IllegalArgumentException("Rows of the matrices don't match");
         else if (ac != bc) throw new IllegalArgumentException("Columns of the matrices don't match");
 
-        float[][] c = new float[ac][ar];
+        double[][] c = new double[ac][ar];
 
         for (int i = 0; i < ac; i++) {
             for (int j = 0; j < ar; j++) {
@@ -60,7 +60,7 @@ public abstract class Matrix {
         return c;
     }
 
-    public static float[][] multiplication(float[][] a, float[][] b) {
+    public static double[][] multiplication(double[][] a, double[][] b) {
 
         int ar = a[0].length; // A - rows
         int ac = a.length;    // A - columns
@@ -69,7 +69,7 @@ public abstract class Matrix {
 
         if (ac != br) throw new IllegalArgumentException("Rows: " + ac + " did not match Column: " + br + ".");
 
-        float[][] c = new float[ar][bc];
+        double[][] c = new double[bc][ar];
 
         for (int i = 0; i < ar; i++) {
             for (int j = 0; j < bc; j++) {
@@ -82,13 +82,32 @@ public abstract class Matrix {
         return c;
     }
 
-    public static void main(String[] args) {
-        float[][] a = new float[][]{{0, 0, 2}, {10, 10, 130}, {0, 20, 10}};
-        float[][] b = new float[][]{{20, 5, 0}, {30, 6, 5}, {0, 1, 10}};
+    public static double[][] rotation(double angle, double[][] m) {
+        double[][] r;
+        double a = Math.toRadians(-angle);
 
-        float[][] c = Matrix.multiplication(a, b);
+        if (m[0].length > 2) throw new IllegalArgumentException("Invalid rows, only x and y are expected.");
+
+        if (angle == 90 || angle == -270) {
+             r = new double[][]{{0, -1}, {1, 0}};
+        } else if (angle == 180 || angle == -180) {
+            r = new double[][]{{-1, 0}, {0, -1}};
+        } else if (angle == 270 || angle == -90) {
+            r = new double[][]{{0, 1}, {-1, 0}};
+        } else {
+            r = new double[][]{{Math.cos(a), -Math.sin(a)}, {Math.sin(a), Math.cos(a)}};
+        }
+
+        return multiplication(r, m);
+    }
+
+    public static void main(String[] args) {
+        double[][] a = new double[][]{{0, 0}, {10, 10}};
+        double[][] b = new double[][]{{20, 5}, {30, 6}, {0, 20}};
+
+        double[][] c = Matrix.rotation(90, b);
         for (int i = 0; i < c.length; i++) {
-            System.out.println(c[i][0] + ", " + c[i][1] + ", " + c[i][2]);
+            System.out.println("x: " + c[i][0] + ", y: " + c[i][1]);
         }
     }
 

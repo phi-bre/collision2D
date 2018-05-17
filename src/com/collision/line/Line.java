@@ -6,7 +6,7 @@ public class Line {
 
     protected Point a, b;
 
-    public Line(float ax, float ay, float bx, float by) {
+    public Line(double ax, double ay, double bx, double by) {
         this.a = new Point(ax, ay);
         this.b = new Point(bx, by);
     }

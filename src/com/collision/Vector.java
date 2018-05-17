@@ -2,7 +2,7 @@ package com.collision;
 
 public class Vector extends Point {
 
-    public Vector(float x, float y) {
+    public Vector(double x, double y) {
         super(x, y);
     }
 
@@ -11,38 +11,38 @@ public class Vector extends Point {
     }
 
     public static Vector add(Vector v1, Vector v2) {
-        float x = v1.x + v2.x;
-        float y = v1.x + v2.y;
+        double x = v1.x + v2.x;
+        double y = v1.x + v2.y;
         return new Vector(x, y);
     }
 
     public static Vector subtract(Vector v1, Vector v2) {
-        float x = v1.x - v2.x;
-        float y = v1.x - v2.y;
+        double x = v1.x - v2.x;
+        double y = v1.x - v2.y;
         return new Vector(x, y);
     }
 
-    public static float dot(Vector v1, Vector v2) {
+    public static double dot(Vector v1, Vector v2) {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
-//    public static float length(Vector v1, Vector v2) {
-//        return (float) Math.sqrt(dot(v1, v1) + dot(v2, v2));
+//    public static double length(Vector v1, Vector v2) {
+//        return (double) Math.sqrt(dot(v1, v1) + dot(v2, v2));
 //    }
 
-    public static float cross(Vector v1, Vector v2) {
+    public static double cross(Vector v1, Vector v2) {
         return v1.x * v2.y - v1.y * v2.x;
     }
 
     public static Vector normalize(Vector vector) {
-        float l = vector.length();
-        float x = vector.x / l;
-        float y = vector.y / l;
+        double l = vector.length();
+        double x = vector.x / l;
+        double y = vector.y / l;
         return new Vector(x, y);
     }
 
-    public static Vector rotate(Vector vector, float a) {
-        float x, y;
+    public static Vector rotate(Vector vector, double a) {
+        double x, y;
 
         // Optimized for special angles
         if (a == 90 || a == -270) {
@@ -56,24 +56,29 @@ public class Vector extends Point {
             y = vector.x;
         } else {
             // For any other angle
-            float theta = (float) Math.toRadians(a);
-            x = (float) (vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y));
-            y = (float) (vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y));
+            double theta = (double) Math.toRadians(a);
+            x = (double) (vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y));
+            y = (double) (vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y));
         }
 
         return new Vector(x, y);
     }
 
-    public float[] asArray() {
-        return new float[]{x, y};
+    public double[] toArray() {
+        return new double[]{x, y};
     }
 
-    public float length() {
-        return (float) Math.sqrt(x * x + y * y);
+    public void fromArray(double[] array) {
+        this.x = array[0];
+        this.y = array[1];
     }
 
-    public void rotate(float a) {
-        float x, y;
+    public double length() {
+        return (double) Math.sqrt(x * x + y * y);
+    }
+
+    public void rotate(double a) {
+        double x, y;
 
         // Optimized for special angles
         if (a == 90) {
@@ -87,16 +92,16 @@ public class Vector extends Point {
             y = this.x;
         } else {
             // For any other angle
-            float theta = (float) Math.toRadians(a);
-            x = (float) (this.x * Math.cos(theta) - (Math.sin(theta) * this.y));
-            y = (float) (this.x * Math.sin(theta) + (Math.cos(theta) * this.y));
+            double theta = (double) Math.toRadians(a);
+            x = (double) (this.x * Math.cos(theta) - (Math.sin(theta) * this.y));
+            y = (double) (this.x * Math.sin(theta) + (Math.cos(theta) * this.y));
         }
 
         this.x = x;
         this.y = y;
     }
 
-    public void translate(float x, float y) {
+    public void translate(double x, double y) {
         this.x += x;
         this.y += y;
     }
