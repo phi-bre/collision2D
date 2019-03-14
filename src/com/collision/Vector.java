@@ -61,15 +61,22 @@ public class Vector extends Point {
         } else {
             // For any other angle
             double theta = Math.toRadians(a);
-            x = vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y);
-            y = vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y);
+            double cos = Math.cos(theta);
+            double sin = Math.sin(theta);
+            x = vector.x * cos - (sin * vector.y);
+            y = vector.x * sin + (cos * vector.y);
         }
 
         return new Vector(x, y);
     }
 
     public double getRotation() {
-        return Math.acos(x / Math.sqrt(x*x + y*y));
+        //return Math.toDegrees(Math.acos(x / Math.sqrt(x*x + y*y))) + 180;
+        double rot = Math.toDegrees(Math.atan2(x, y)) + 180;
+        if (rot < 0) {
+            rot += 360;
+        }
+        return rot;
     }
 
     public double[] toArray() {

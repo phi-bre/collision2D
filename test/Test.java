@@ -39,7 +39,7 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test4();
+        test1();
     }
 
     private void test4() {
@@ -57,6 +57,8 @@ public class Test extends Application {
                 renderSegments(s);
                 renderPoints(intersection);
             }
+//            Vector vector = new Vector(Vector.subtract(new Vector(ray.getA()), new Vector(ray.getB())));
+//            System.out.println(vector.getRotation());
             renderRay(ray);
             renderSegments(segment);
         }));
@@ -104,14 +106,14 @@ public class Test extends Application {
     public void test1() {
         ArrayList<Shape> shapes = new ArrayList<>();
         Rectangle r1 = new Rectangle(120, 130, 0, 100, 70);
-        Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
+        //Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
         Rectangle r4 = new Rectangle(70, 150, 0, 50, 100);
         Rectangle r3 = new Rectangle(90, 200, 0, 150, 120);
         shapes.add(r1);
-        shapes.add(r2);
+        //shapes.add(r2);
         shapes.add(r3);
         shapes.add(r4);
-        r2.rotate(15);
+        //r2.rotate(15);
 
         canvas.setOnMouseMoved((event -> {
             r1.setPosition((float) event.getX(), (float) event.getY());
@@ -127,7 +129,7 @@ public class Test extends Application {
                 }
             }
 
-            renderRectangles(r1, r2, r3, r4);
+            renderRectangles(r1, r3, r4);
             renderPoints(intersections.toArray(new Intersection[0]));
         }));
     }

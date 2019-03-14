@@ -57,18 +57,17 @@ public class Reflection {
         Intersection intersection = Intersection.getIntersection(ray, line);
         if (intersection == null) throw new IllegalArgumentException("Ray and line do not intersect");
 
-        Vector r = new Vector(ray.getA());
-        Vector d = new Vector(line.getA());
+        double x = ray.getA().getX() - intersection.x;
+        double y = ray.getA().getY() - intersection.y;
+        double dx = line.getB().getX() - intersection.x;
+        double dy = line.getB().getY() - intersection.y;
 
-        r.translate(-intersection.x, -intersection.y);
-        d.translate(-intersection.x, -intersection.y);
+        Vector r = new Vector(x, y);
+        Vector d = new Vector(dx, dy);
 
-        double a = d.getRotation();
-        r.rotate(-a);
-
-        r = new Vector(r.getX(), -r.getY());
-        r.rotate(a);
-        r.translate(intersection.x, intersection.y);
+        r.rotate(r.getRotation() - d.getRotation());
+        r.setX(-r.getX());
+        r.rotate(r.getRotation() + d.getRotation());
 
         Reflection reflection = new Reflection();
         reflection.vector = r;
