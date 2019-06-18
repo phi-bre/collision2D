@@ -112,14 +112,4 @@ public abstract class Matrix {
         return multiplication(r, m);
     }
 
-    public static void main(String[] args) {
-        double[][] a = new double[][]{{0, 0}, {10, 10}};
-        double[][] b = new double[][]{{20, 5}, {30, 6}, {0, 20}};
-
-        double[][] c = Matrix.rotation(90, b);
-        for (int i = 0; i < c.length; i++) {
-            System.out.println("x: " + c[i][0] + ", y: " + c[i][1]);
-        }
-    }
-
 }

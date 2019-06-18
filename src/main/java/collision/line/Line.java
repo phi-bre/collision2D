@@ -2,7 +2,7 @@ package collision.line;
 
 import collision.Point;
 
-public class Line {
+public abstract class Line {
 
     protected Point a, b;
 

@@ -6,10 +6,10 @@ public class Circle extends Shape {
 
     private double r;
 
-    public Circle(double x, double y, double radius) {
+    public Circle(double x, double y, double r) {
         this.x = x;
         this.y = y;
-        this.r = radius;
+        this.r = r;
     }
 
     public double getRadius() {
@@ -27,7 +27,7 @@ public class Circle extends Shape {
 
     @Override
     public Intersection[] getIntersections(Shape shape) {
-        return null;
+        return null; // TODO: Implement method
     }
 
     @Override
