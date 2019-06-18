@@ -1,7 +1,7 @@
-package com.collision;
+package collision;
 
-import com.collision.line.Line;
-import com.collision.line.Ray;
+import collision.line.Line;
+import collision.line.Ray;
 
 public class Intersection extends Point {
 
@@ -32,7 +32,7 @@ public class Intersection extends Point {
 
     public static Intersection getIntersection(Line l1, Line l2) {
 
-        long past = System.currentTimeMillis();
+        //long past = System.currentTimeMillis();
         // Line 1
         double v1px = l1.getA().getX();
         double v1py = l1.getA().getY();
@@ -64,7 +64,7 @@ public class Intersection extends Point {
         double x = v1px + v1dx * t1;
         double y = v1py + v1dy * t1;
 
-        System.out.println(System.currentTimeMillis() - past);
+        //System.out.println(System.currentTimeMillis() - past);
 
         Intersection intersection = new Intersection(x, y, t1, t2);
         intersection.l1 = l1;

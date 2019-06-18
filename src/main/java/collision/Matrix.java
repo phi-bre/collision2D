@@ -1,4 +1,4 @@
-package com.collision;
+package collision;
 
 public abstract class Matrix {
 

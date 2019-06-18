@@ -1,6 +1,6 @@
-package com.collision.shape;
+package collision.shape;
 
-import com.collision.Intersection;
+import collision.Intersection;
 
 public abstract class Shape {
 

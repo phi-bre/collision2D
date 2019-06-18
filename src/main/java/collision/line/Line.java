@@ -1,6 +1,6 @@
-package com.collision.line;
+package collision.line;
 
-import com.collision.Point;
+import collision.Point;
 
 public class Line {
 
@@ -10,7 +10,6 @@ public class Line {
         this.a = new Point(ax, ay);
         this.b = new Point(bx, by);
     }
-
 
     public Line(Point a, Point b) {
         this.a = a;

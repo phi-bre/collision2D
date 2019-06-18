@@ -1,4 +1,4 @@
-package com.collision;
+package collision;
 
 public class Vector extends Point {
 

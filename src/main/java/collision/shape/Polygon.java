@@ -1,10 +1,10 @@
-package com.collision.shape;
+package collision.shape;
 
-import com.collision.Intersection;
-import com.collision.Matrix;
-import com.collision.Point;
-import com.collision.Vector;
-import com.collision.line.Segment;
+import collision.Intersection;
+import collision.Matrix;
+import collision.Point;
+import collision.Vector;
+import collision.line.Segment;
 
 import java.util.ArrayList;
 

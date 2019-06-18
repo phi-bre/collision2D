@@ -1,9 +1,3 @@
-import com.collision.*;
-import com.collision.line.Line;
-import com.collision.line.Ray;
-import com.collision.line.Segment;
-import com.collision.shape.Rectangle;
-import com.collision.shape.Shape;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +10,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import collision.*;
+import collision.line.*;
+import collision.shape.*;
 
 public class Test extends Application {
 
@@ -39,7 +37,7 @@ public class Test extends Application {
         primaryStage.show();
         this.gc = canvas.getGraphicsContext2D();
 
-        test1();
+        test3();
     }
 
     private void test4() {

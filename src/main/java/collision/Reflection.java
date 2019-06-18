@@ -1,7 +1,7 @@
-package com.collision;
+package collision;
 
-import com.collision.line.Line;
-import com.collision.line.Ray;
+import collision.line.Line;
+import collision.line.Ray;
 
 public class Reflection {
 

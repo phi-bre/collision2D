@@ -1,6 +1,6 @@
-package com.collision.line;
+package collision.line;
 
-import com.collision.Point;
+import collision.Point;
 
 public class Ray extends Line {
 
