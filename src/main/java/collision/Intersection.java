@@ -44,7 +44,7 @@ public class Intersection extends Point {
         double v2dx = l2.getB().getX() - l2.getA().getX();
         double v2dy = l2.getB().getY() - l2.getA().getY();
 
-        // If Parallel
+        // If parallel
         double v1mag = Math.sqrt(v1dx * v1dx + v1dy * v1dy);
         double v2mag = Math.sqrt(v2dx * v2dx + v2dy * v2dy);
         if (v1dx / v1mag == v2dx / v2mag && v1dy / v1mag == v2dy / v2mag) { // Directions are the same.

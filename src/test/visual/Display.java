@@ -1,3 +1,5 @@
+package visual;
+
 import collision.Intersection;
 import collision.Point;
 import collision.line.Ray;
@@ -14,15 +16,16 @@ import javafx.stage.Stage;
 
 public class Display extends Application {
 
-    private int WIDTH, HEIGHT;
+    protected final int WIDTH = 512, HEIGHT = 512;
+    protected GraphicsContext gc;
+    protected Canvas canvas;
 
-    private GraphicsContext gc;
-    private Canvas canvas;
+    public Display() {
+
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        WIDTH = 512;
-        HEIGHT = 512;
         // Initialization
         Pane root = new Pane();
         Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -37,13 +40,13 @@ public class Display extends Application {
         // START
     }
 
-    public void renderRectangles(Rectangle... rectangles) {
+    public void renderRectangles(Rectangle ... rectangles) {
         for (Rectangle rectangle : rectangles) {
             renderSegments(rectangle.getSegments());
         }
     }
 
-    public void renderSegments(Segment... segments) {
+    public void renderSegments(Segment ... segments) {
         for (Segment segment : segments) {
             gc.setStroke(Color.BLACK);
             gc.strokeLine(
@@ -55,7 +58,7 @@ public class Display extends Application {
         }
     }
 
-    public void renderPoints(Point... points) {
+    public void renderPoints(Point ... points) {
         for (Point point : points) {
             //if (point != null) {
             float size = 5;

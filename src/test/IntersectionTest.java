@@ -1,10 +1,7 @@
-package classes;
-
 import collision.Intersection;
 import collision.Point;
 import collision.line.Ray;
 import collision.line.Segment;
-import collision.shape.Polygon;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

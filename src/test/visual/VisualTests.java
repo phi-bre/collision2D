@@ -1,3 +1,5 @@
+package visual;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -6,7 +8,19 @@ import collision.*;
 import collision.line.*;
 import collision.shape.*;
 
-public class Test {
+import javafx.stage.Stage;
+
+public class VisualTests extends Display {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        super.start(primaryStage);
+        test4();
+    }
 
     private void test4() {
         Segment segment = new Segment(400, 10, 200, 200);
@@ -110,23 +124,4 @@ public class Test {
         if (intersection != null) renderPoints(intersection);
     }
 
-    public Intersection[] getIntersections(Shape ... shapes) {
-        ArrayList<Intersection> intersections = new ArrayList<>();
-
-        for (Shape shape : shapes) {
-            for (Shape s : shapes) {
-                if (shape != s) {
-                    intersections.addAll(Arrays.asList(shape.getIntersections(s)));
-                }
-            }
-        }
-
-        return intersections.toArray(new Intersection[0]);
-    }
-
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

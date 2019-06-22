@@ -16,6 +16,16 @@ public abstract class Line {
         this.b = b;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Line) {
+            Line l = (Line) obj;
+            return a.equals(l.a) && b.equals(l.b);
+        } else {
+            return super.equals(obj);
+        }
+    }
+
     public Point getA() {
         return a;
     }

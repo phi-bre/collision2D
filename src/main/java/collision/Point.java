@@ -10,6 +10,16 @@ public class Point {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Point) {
+            Point p = (Point) obj;
+            return x == p.x && y == p.y;
+        } else {
+            return super.equals(obj);
+        }
+    }
+
     public double getX() {
         return x;
     }
