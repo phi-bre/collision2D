@@ -2,23 +2,38 @@ package collision;
 
 public class Vector extends Point {
 
+    private boolean normalized;
+    private Point origin;
+
     public Vector(double x, double y) {
         super(x, y);
     }
 
-    public Vector(Point point) {
-        super(point.getX(), point.getY());
+    public Vector(Point t) {
+        super(t.x, t.y);
     }
+
+    public Vector(double ox, double oy, double x, double y) {
+        super(x, y);
+        this.origin = new Point(ox, oy);
+    }
+
+    public Vector(Point origin, Point t) {
+        super(t.x, t.y);
+        this.origin = origin;
+    }
+
+    /* STATIC METHODS */
 
     public static Vector add(Vector v1, Vector v2) {
         double x = v1.x + v2.x;
-        double y = v1.x + v2.y;
+        double y = v1.y + v2.y;
         return new Vector(x, y);
     }
 
     public static Vector subtract(Vector v1, Vector v2) {
         double x = v1.x - v2.x;
-        double y = v1.x - v2.y;
+        double y = v1.y - v2.y;
         return new Vector(x, y);
     }
 
@@ -26,13 +41,9 @@ public class Vector extends Point {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
-    public static Vector multiplication(double scalar, Vector vector) {
+    public static Vector scale(double scalar, Vector vector) {
         return new Vector(vector.x * scalar, vector.y * scalar);
     }
-
-//    public static double length(Vector v1, Vector v2) {
-//        return (double) Math.sqrt(dot(v1, v1) + dot(v2, v2));
-//    }
 
     public static double cross(Vector v1, Vector v2) {
         return v1.x * v2.y - v1.y * v2.x;
@@ -42,7 +53,9 @@ public class Vector extends Point {
         double l = vector.length();
         double x = vector.x / l;
         double y = vector.y / l;
-        return new Vector(x, y);
+        Vector v = new Vector(x, y);
+        v.normalized = true;
+        return v;
     }
 
     public static Vector rotate(Vector vector, double a) {
@@ -70,6 +83,8 @@ public class Vector extends Point {
         return new Vector(x, y);
     }
 
+    /* INSTANCE METHODS */
+
     public double getRotation() {
         //return Math.toDegrees(Math.acos(x / Math.sqrt(x*x + y*y))) + 180;
         double rot = Math.toDegrees(Math.atan2(x, y)) + 180;
@@ -79,17 +94,12 @@ public class Vector extends Point {
         return rot;
     }
 
-    public double[] toArray() {
-        return new double[]{x, y};
-    }
-
-    public void fromArray(double[] array) {
-        this.x = array[0];
-        this.y = array[1];
-    }
-
     public double length() {
         return Math.sqrt(x * x + y * y);
+    }
+
+    public boolean isNormalized() {
+        return normalized;
     }
 
     public void rotate(double a) {
@@ -119,6 +129,31 @@ public class Vector extends Point {
     public void translate(double x, double y) {
         this.x += x;
         this.y += y;
+    }
+
+    public Vector normalize() {
+        double l = this.length();
+        this.x = x / l;
+        this.y = y / l;
+        normalized = true;
+        return this;
+    }
+
+    public Point getOrigin() {
+        return origin;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector{" + "x: " + x + ", y: " + y + '}';
+    }
+
+    public static void main(String[] args) {
+        Vector d = new Vector(1, -1);
+        Vector n = new Vector(0, 1).normalize();
+        System.out.println(Vector.scale(-2 * Vector.dot(d, n), n));
+        System.out.println(Vector.add(d, Vector.scale(-2 * Vector.dot(d, n), n)));
+        //System.out.println(Vector.add(Vector.subtract(d, Vector.scale(Vector.dot(d, n), n)), Vector.scale(Vector.dot(d, n), n)));
     }
 
 }

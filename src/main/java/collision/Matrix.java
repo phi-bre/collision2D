@@ -93,18 +93,22 @@ public abstract class Matrix {
         return multiplication(t, mt);
     }
 
-    public static double[][] rotation(double angle, double[][] m) {
-        double[][] r;
-        double a = Math.toRadians(-angle);
+    private static final double[][] R1 = new double[][]{{0, -1}, {1, 0}};
+    private static final double[][] R2 = new double[][]{{-1, 0}, {0, -1}};
+    private static final double[][] R3 = new double[][]{{0, 1}, {-1, 0}};
 
+    public static double[][] rotation(double angle, double[][] m) {
         if (m[0].length > 2) throw new IllegalArgumentException("Invalid rows, only x and y are expected.");
 
+        double a = Math.toRadians(-angle);
+        double[][] r;
+
         if (angle == 90 || angle == -270) {
-             r = new double[][]{{0, -1}, {1, 0}};
+            r = R1;
         } else if (angle == 180 || angle == -180) {
-            r = new double[][]{{-1, 0}, {0, -1}};
+            r = R2;
         } else if (angle == 270 || angle == -90) {
-            r = new double[][]{{0, 1}, {-1, 0}};
+            r = R3;
         } else {
             r = new double[][]{{Math.cos(a), -Math.sin(a)}, {Math.sin(a), Math.cos(a)}};
         }

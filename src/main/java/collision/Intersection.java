@@ -1,12 +1,9 @@
 package collision;
 
-import collision.line.Line;
-import collision.line.Ray;
-
 public class Intersection extends Point {
 
     private double t1, t2;
-    private Line l1, l2;
+    private Vector v1, v2;
 
     public Intersection(double x, double y, double t1, double t2) {
         super(x, y);
@@ -22,27 +19,27 @@ public class Intersection extends Point {
         return t2;
     }
 
-    public Line getL1() {
-        return l1;
+    public Vector getV1() {
+        return v1;
     }
 
-    public Line getL2() {
-        return l2;
+    public Vector getV2() {
+        return v2;
     }
 
-    public static Intersection getIntersection(Line l1, Line l2) {
+    public static Intersection getIntersection(Vector v1, Vector v2) {
 
         // Line 1
-        double v1px = l1.getA().getX();
-        double v1py = l1.getA().getY();
-        double v1dx = l1.getB().getX() - l1.getA().getX();
-        double v1dy = l1.getB().getY() - l1.getA().getY();
+        double v1px = v1.getOrigin().getX();
+        double v1py = v1.getOrigin().getY();
+        double v1dx = v1.getX() - v1px;
+        double v1dy = v1.getY() - v1py;
 
         // Line 2
-        double v2px = l2.getA().getX();
-        double v2py = l2.getA().getY();
-        double v2dx = l2.getB().getX() - l2.getA().getX();
-        double v2dy = l2.getB().getY() - l2.getA().getY();
+        double v2px = v2.getOrigin().getX();
+        double v2py = v2.getOrigin().getY();
+        double v2dx = v2.getX() - v2px;
+        double v2dy = v2.getY() - v2py;
 
         // If parallel
         double v1mag = Math.sqrt(v1dx * v1dx + v1dy * v1dy);
@@ -57,15 +54,15 @@ public class Intersection extends Point {
 
         // Some magic
         if (t1 < 0) return null;
-        if (!(l1 instanceof Ray) && t1 > 1) return null;
+        if (!(v1.isNormalized()) && t1 > 1) return null;
         if (t2 < 0 || t2 > 1) return null;
 
         double x = v1px + v1dx * t1;
         double y = v1py + v1dy * t1;
 
         Intersection intersection = new Intersection(x, y, t1, t2);
-        intersection.l1 = l1;
-        intersection.l2 = l2;
+        intersection.v1 = v1;
+        intersection.v2 = v2;
         return intersection;
     }
 

@@ -2,9 +2,8 @@ package visual;
 
 import collision.Intersection;
 import collision.Point;
-import collision.line.Ray;
-import collision.line.Segment;
-import collision.shape.Rectangle;
+import collision.Vector;
+import collision.shapes.Rectangle;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,10 +18,6 @@ public class Display extends Application {
     protected final int WIDTH = 512, HEIGHT = 512;
     protected GraphicsContext gc;
     protected Canvas canvas;
-
-    public Display() {
-
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,40 +37,35 @@ public class Display extends Application {
 
     public void renderRectangles(Rectangle ... rectangles) {
         for (Rectangle rectangle : rectangles) {
-            renderSegments(rectangle.getSegments());
+            renderVectors(rectangle.getSegments());
         }
     }
 
-    public void renderSegments(Segment ... segments) {
-        for (Segment segment : segments) {
-            gc.setStroke(Color.BLACK);
+    public void renderVectors(Vector... segments) {
+        gc.setStroke(Color.BLACK);
+        for (Vector segment : segments) {
             gc.strokeLine(
-                    segment.getA().getX(),
-                    segment.getA().getY(),
-                    segment.getB().getX(),
-                    segment.getB().getY()
+                    segment.getOrigin().getX(),
+                    segment.getOrigin().getY(),
+                    segment.getX(),
+                    segment.getY()
             );
         }
     }
 
     public void renderPoints(Point ... points) {
+        gc.setFill(Color.RED);
         for (Point point : points) {
-            //if (point != null) {
-            float size = 5;
-            gc.setFill(Color.RED);
+            double size = 5;
             gc.fillOval(point.getX() - size / 2, point.getY() - size / 2, size, size);
-            //}
         }
     }
 
-    public void renderRay(Ray ray) {
-        Rectangle rectangle = new Rectangle(WIDTH/2, HEIGHT/2, 0, WIDTH, HEIGHT);
-        Intersection intersection;
-        for (Segment segment : rectangle.getSegments()) {
-            if ((intersection = Intersection.getIntersection(ray, segment)) != null) {
-                gc.setFill(Color.LIGHTGRAY);
-                gc.strokeLine(ray.getA().getX(), ray.getA().getY(), intersection.getX(), intersection.getY());
-            }
+    public void renderRays(Vector ... rays) {
+        gc.setFill(Color.LIGHTGRAY);
+        for (Vector ray : rays) {
+            Vector outer = Vector.scale(WIDTH * 2, ray);
+            gc.strokeLine(ray.getOrigin().getX(), ray.getOrigin().getY(), outer.getX(), outer.getY());
         }
     }
 }

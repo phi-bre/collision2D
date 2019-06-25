@@ -1,4 +1,4 @@
-package collision.shape;
+package collision.shapes;
 
 import collision.Intersection;
 
@@ -21,13 +21,13 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void update() {
-        // nothing
+    public Intersection[] getIntersections(Shape shape) {
+        return null; // TODO: Implement method
     }
 
     @Override
-    public Intersection[] getIntersections(Shape shape) {
-        return null; // TODO: Implement method
+    public boolean intersects(Shape shape) {
+        return false; // TODO: Implement method
     }
 
     @Override

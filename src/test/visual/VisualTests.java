@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import collision.*;
-import collision.line.*;
-import collision.shape.*;
+import collision.shapes.*;
 
 import javafx.stage.Stage;
 
@@ -19,68 +18,80 @@ public class VisualTests extends Display {
     @Override
     public void start(Stage primaryStage) throws Exception {
         super.start(primaryStage);
+        //test4();
         test4();
     }
 
     private void test4() {
-        Segment segment = new Segment(400, 10, 200, 200);
-        Ray ray = new Ray(30, 30, 235, 80);
+        Vector segment = new Vector(100, 400, 400, 200);
+        Vector ray = new Vector(0, 0, 0, 0).normalize();
 
         canvas.setOnMouseMoved((event -> {
-            ray.getB().setPosition(event.getX(), event.getY());
+            ray.setPosition(event.getX(), event.getY());
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+            Vector n = new Vector(segment.getOrigin(), Vector.add(Vector.rotate(Vector.subtract(segment, new Vector(segment.getOrigin())), 90), new Vector(segment.getOrigin())));
+            renderVectors(n);
 
             Intersection intersection = Intersection.getIntersection(ray, segment);
             if (intersection != null) {
                 Reflection reflection = Reflection.getReflection(ray, segment);
-                Segment s = new Segment(reflection.getVector(), reflection.getOrigin());
-                renderSegments(s);
+                Vector s = new Vector(reflection.getVector(), reflection.getOrigin());
+                renderVectors(s);
                 renderPoints(intersection);
             }
-//            Vector vector = new Vector(Vector.subtract(new Vector(ray.getA()), new Vector(ray.getB())));
-//            System.out.println(vector.getRotation());
-            renderRay(ray);
-            renderSegments(segment);
+
+            renderRays(ray);
+            renderVectors(segment);
         }));
     }
 
     private void test3() {
-        ArrayList<Line> lines = new ArrayList<>();
+        ArrayList<Vector> lines = new ArrayList<>();
 //        Rectangle r1 = new Rectangle(120, 130, 0, 100, 70);
 //        Rectangle r2 = new Rectangle(70, 150, 0, 50, 100);
 //        Rectangle r3 = new Rectangle(90, 200, 0, 150, 120);
-        Ray ray = new Ray(200, 200, 0, 0);
+        Vector ray = new Vector(200, 200, 0, 0).normalize();
 //        lines.addAll(Arrays.asList(r1.getSegments()));
 //        lines.addAll(Arrays.asList(r2.getSegments()));
 //        lines.addAll(Arrays.asList(r3.getSegments()));
         Random random = new Random();
         for (int i = 0; i < 100; i++) {
-            Segment segment = new Segment(random.nextInt(512), random.nextInt(512), random.nextInt(512), random.nextInt(512));
+            Vector segment = new Vector(random.nextInt(512), random.nextInt(512), random.nextInt(512), random.nextInt(512));
             lines.add(segment);
         }
         lines.add(ray);
 
         canvas.setOnMouseMoved((event -> {
-            ray.getB().setPosition((float) event.getX(), (float) event.getY());
+            ray.setPosition(event.getX(), event.getY());
 
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             ArrayList<Intersection> intersections = new ArrayList<>();
 
-            for (Line line : lines) {
-                for (Line l : lines) {
+            for (Vector line : lines) {
+                for (Vector l : lines) {
                     Intersection intersection = Intersection.getIntersection(l, line);
                     if (intersection != null) intersections.add(intersection);
                 }
             }
 
             //renderRectangles(r1, r2, r3);
-            for (Line line : lines) {
-                if (line instanceof Segment) {
-                    renderSegments((Segment) line);
-                }
+            for (Vector line : lines) {
+                renderVectors(line);
             }
             renderPoints(intersections.toArray(new Intersection[0]));
         }));
+    }
+
+    public void test2() {
+        Vector s1 = new Vector(100, 100, 200, 200);
+        Vector s2 = new Vector(300, 130, 100, 200);
+
+        renderPoints(s1, s2);
+        Intersection intersection = Intersection.getIntersection(s1, s2);
+
+        renderVectors(s1, s2);
+        if (intersection != null) renderPoints(intersection);
     }
 
     public void test1() {
@@ -112,16 +123,6 @@ public class VisualTests extends Display {
             renderRectangles(r1, r3, r4);
             renderPoints(intersections.toArray(new Intersection[0]));
         }));
-    }
-
-    public void test2() {
-        Segment s1 = new Segment(100, 100, 200, 200);
-        Segment s2 = new Segment(300, 230, 100, 200);
-
-        Intersection intersection = Intersection.getIntersection(s1, s2);
-
-        renderSegments(s1, s2);
-        if (intersection != null) renderPoints(intersection);
     }
 
 }

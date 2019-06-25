@@ -1,4 +1,4 @@
-package collision.shape;
+package collision.shapes;
 
 import collision.Vector;
 
