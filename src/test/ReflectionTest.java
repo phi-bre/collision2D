@@ -12,7 +12,7 @@ public class ReflectionTest {
     @Test
     public void reflection() {
         Vector segment = new Vector(10, 20, 10, 0);
-        Vector ray = new Vector(0, 0, 5, 5).normalize();
+        Vector ray = new Vector(0, 0, 5, 5).setRay(true);
 
         Reflection reflection = Reflection.getReflection(ray, segment);
         Vector vector = reflection.getVector();

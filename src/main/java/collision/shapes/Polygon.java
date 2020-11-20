@@ -44,7 +44,6 @@ public class Polygon extends Shape {
     @Override
     public void rotate(double angle) {
         this.a = angle;
-
         double a = Math.toRadians(-this.a);
         double[][] r;
 

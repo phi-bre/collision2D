@@ -18,8 +18,26 @@ public class VisualTests extends Display {
     @Override
     public void start(Stage primaryStage) throws Exception {
         super.start(primaryStage);
-        //test4();
         test4();
+        //test5();
+    }
+
+    private void test5() {
+        Vector segment = new Vector(0, 0, 100, 0);
+        Vector ray = new Vector(0, 100, 50, 0).normalize();
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        Intersection intersection = Intersection.getIntersection(ray, segment);
+        if (intersection != null) {
+            Reflection reflection = Reflection.getReflection(ray, segment);
+            Vector s = new Vector(reflection.getVector(), reflection.getOrigin());
+            renderVectors(s);
+            renderPoints(intersection);
+        }
+
+        renderRays(ray);
+        renderVectors(segment);
     }
 
     private void test4() {

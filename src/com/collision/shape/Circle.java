@@ -1,14 +1,15 @@
-package collision.shapes;
+package com.collision.shape;
 
-import collision.Intersection;
+import com.collision.Intersection;
 
 public class Circle extends Shape {
+
     private double r;
 
-    public Circle(double x, double y, double r) {
+    public Circle(double x, double y, double radius) {
         this.x = x;
         this.y = y;
-        this.r = r;
+        this.r = radius;
     }
 
     public double getRadius() {
@@ -20,13 +21,13 @@ public class Circle extends Shape {
     }
 
     @Override
-    public Intersection[] getIntersections(Shape shape) {
-        return null; // TODO: Implement method
+    public void update() {
+        // nothing
     }
 
     @Override
-    public boolean intersects(Shape shape) {
-        return false; // TODO: Implement method
+    public Intersection[] getIntersections(Shape shape) {
+        return null;
     }
 
     @Override

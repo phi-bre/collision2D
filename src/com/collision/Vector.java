@@ -1,39 +1,24 @@
-package collision;
+package com.collision;
 
 public class Vector extends Point {
-
-    private Vector origin;
-    private boolean ray;
 
     public Vector(double x, double y) {
         super(x, y);
     }
 
-    public Vector(Point t) {
-        super(t.x, t.y);
+    public Vector(Point point) {
+        super(point.getX(), point.getY());
     }
-
-    public Vector(double ox, double oy, double x, double y) {
-        super(x, y);
-        this.origin = new Vector(ox, oy);
-    }
-
-    public Vector(Point origin, Point t) {
-        super(t.x, t.y);
-        this.origin = new Vector(origin);
-    }
-
-    /* STATIC METHODS */
 
     public static Vector add(Vector v1, Vector v2) {
         double x = v1.x + v2.x;
-        double y = v1.y + v2.y;
+        double y = v1.x + v2.y;
         return new Vector(x, y);
     }
 
     public static Vector subtract(Vector v1, Vector v2) {
         double x = v1.x - v2.x;
-        double y = v1.y - v2.y;
+        double y = v1.x - v2.y;
         return new Vector(x, y);
     }
 
@@ -41,9 +26,13 @@ public class Vector extends Point {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
-    public static Vector scale(double scalar, Vector vector) {
+    public static Vector multiplication(double scalar, Vector vector) {
         return new Vector(vector.x * scalar, vector.y * scalar);
     }
+
+//    public static double length(Vector v1, Vector v2) {
+//        return (double) Math.sqrt(dot(v1, v1) + dot(v2, v2));
+//    }
 
     public static double cross(Vector v1, Vector v2) {
         return v1.x * v2.y - v1.y * v2.x;
@@ -53,8 +42,7 @@ public class Vector extends Point {
         double l = vector.length();
         double x = vector.x / l;
         double y = vector.y / l;
-        Vector v = new Vector(x, y);
-        return v;
+        return new Vector(x, y);
     }
 
     public static Vector rotate(Vector vector, double a) {
@@ -73,24 +61,24 @@ public class Vector extends Point {
         } else {
             // For any other angle
             double theta = Math.toRadians(a);
-            double cos = Math.cos(theta);
-            double sin = Math.sin(theta);
-            x = vector.x * cos - (sin * vector.y);
-            y = vector.x * sin + (cos * vector.y);
+            x = vector.x * Math.cos(theta) - (Math.sin(theta) * vector.y);
+            y = vector.x * Math.sin(theta) + (Math.cos(theta) * vector.y);
         }
 
         return new Vector(x, y);
     }
 
-    /* INSTANCE METHODS */
-
     public double getRotation() {
-        //return Math.toDegrees(Math.acos(x / Math.sqrt(x*x + y*y))) + 180;
-        double rot = Math.toDegrees(Math.atan2(x, y)) + 180;
-        if (rot < 0) {
-            rot += 360;
-        }
-        return rot;
+        return Math.acos(x / Math.sqrt(x*x + y*y));
+    }
+
+    public double[] toArray() {
+        return new double[]{x, y};
+    }
+
+    public void fromArray(double[] array) {
+        this.x = array[0];
+        this.y = array[1];
     }
 
     public double length() {
@@ -126,36 +114,4 @@ public class Vector extends Point {
         this.y += y;
     }
 
-    public Vector normalize() {
-        double l = this.length();
-        this.x = x / l;
-        this.y = y / l;
-        return this;
-    }
-
-    public boolean isRay() {
-        return ray;
-    }
-
-    public Vector setRay(boolean ray) {
-        this.ray = ray;
-        return this;
-    }
-
-    public Point getOrigin() {
-        return origin;
-    }
-
-    public Point getAbsolute() {
-        if (origin == null)  {
-            return new Point(x, y);
-        } else {
-            return origin.getAbsolute();
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Vector{" + "x: " + x + ", y: " + y + '}';
-    }
 }
